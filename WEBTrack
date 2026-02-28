@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كورس تطوير المواقع | أبناؤكم يستحقون المستقبل</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F5A623;
+    --gold-light: #FFD580;
+    --deep: #0A0A1A;
+    --navy: #0D1B3E;
+    --accent: #00D4FF;
+    --accent2: #FF6B35;
+    --text: #E8E8F0;
+    --text-muted: #8890AA;
+    --glass: rgba(255,255,255,0.05);
+    --glass-border: rgba(255,255,255,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--deep);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 40px; height: 40px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed; top: 0; width: 100%;
+    z-index: 100;
+    padding: 1.2rem 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,10,26,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .logo {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 800; font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+  }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--accent2));
+    border: none; color: #fff;
+    padding: 0.6rem 1.8rem;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700; font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(245,166,35,0.3);
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,166,35,0.5); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 5% 4rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(245,166,35,0.06) 0%, transparent 60%),
+      linear-gradient(180deg, #0A0A1A 0%, #0D1B3E 100%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; max-width: 900px; margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(245,166,35,0.1);
+    border: 1px solid rgba(245,166,35,0.3);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem; color: var(--gold);
+    margin-bottom: 2rem;
+    animation: fadeDown 0.8s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+
+  .hero-title span {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem; color: var(--text-muted);
+    line-height: 1.8; max-width: 650px; margin: 0 auto 2.5rem;
+    animation: fadeUp 0.9s ease 0.35s both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.9s ease 0.5s both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--accent2));
+    color: #fff; border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700; font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(245,166,35,0.35);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(245,166,35,0.5); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--glass-border);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 600; font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+
+  .hero-stats {
+    display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+    margin-top: 4rem;
+    animation: fadeUp 0.9s ease 0.7s both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 800; font-size: 2.2rem;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-label { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.2rem; }
+
+  /* Floating elements */
+  .float-code {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    opacity: 0.15;
+    animation: floatAnim 6s ease-in-out infinite;
+    color: var(--accent);
+  }
+
+  /* ===== PAIN SECTION ===== */
+  .pain-section {
+    padding: 6rem 5%;
+    background: linear-gradient(180deg, #0D1B3E 0%, #0A0A1A 100%);
+    position: relative;
+  }
+
+  .section-tag {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 3.5rem;
+    line-height: 1.8;
+    font-size: 1.05rem;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .pain-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .pain-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+  }
+  .pain-card:hover { transform: translateY(-5px); border-color: rgba(255,107,53,0.3); }
+
+  .pain-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .pain-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.7rem; color: var(--accent2); }
+  .pain-card p { color: var(--text-muted); line-height: 1.7; font-size: 0.95rem; }
+
+  /* ===== SOLUTION SECTION ===== */
+  .solution-section {
+    padding: 6rem 5%;
+    background: #0A0A1A;
+  }
+
+  /* ===== LEVELS (3 Levels) ===== */
+  .levels-section {
+    padding: 6rem 5%;
+    background: linear-gradient(180deg, #0A0A1A 0%, #0D1B3E 100%);
+  }
+
+  .levels-wrapper {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .level-card {
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.4s;
+    position: relative;
+    cursor: pointer;
+  }
+  .level-card:hover { transform: translateY(-8px); }
+
+  .level-header {
+    padding: 2rem 2rem 1.5rem;
+    position: relative;
+  }
+
+  .level-1 .level-header { background: linear-gradient(135deg, #1a3a1a, #0d2d0d); border: 1px solid rgba(46,213,115,0.2); }
+  .level-2 .level-header { background: linear-gradient(135deg, #1a2a3a, #0d1d2d); border: 1px solid rgba(0,212,255,0.2); }
+  .level-3 .level-header { background: linear-gradient(135deg, #3a1a2a, #2d0d1a); border: 1px solid rgba(245,166,35,0.2); }
+
+  .level-1 { box-shadow: 0 20px 60px rgba(46,213,115,0.1); }
+  .level-2 { box-shadow: 0 20px 60px rgba(0,212,255,0.1); }
+  .level-3 { box-shadow: 0 20px 60px rgba(245,166,35,0.15); }
+
+  .level-badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+  .level-1 .level-badge { background: rgba(46,213,115,0.2); color: #2ED573; border: 1px solid rgba(46,213,115,0.3); }
+  .level-2 .level-badge { background: rgba(0,212,255,0.2); color: var(--accent); border: 1px solid rgba(0,212,255,0.3); }
+  .level-3 .level-badge { background: rgba(245,166,35,0.2); color: var(--gold); border: 1px solid rgba(245,166,35,0.3); }
+
+  .level-num {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 3.5rem; font-weight: 900;
+    opacity: 0.08;
+    position: absolute; top: 1rem; left: 1.5rem;
+  }
+  .level-1 .level-num { color: #2ED573; }
+  .level-2 .level-num { color: var(--accent); }
+  .level-3 .level-num { color: var(--gold); }
+
+  .level-icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+  .level-title { font-family: 'Tajawal', sans-serif; font-size: 1.6rem; font-weight: 800; margin-bottom: 0.4rem; }
+  .level-subtitle { color: var(--text-muted); font-size: 0.9rem; }
+
+  .level-body {
+    padding: 1.5rem 2rem 2rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--glass-border);
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .level-topics { list-style: none; }
+  .level-topics li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 0.9rem; color: var(--text-muted);
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .level-topics li:last-child { border-bottom: none; }
+  .level-topics li::before { content: '✓'; font-weight: 700; flex-shrink: 0; }
+  .level-1 .level-topics li::before { color: #2ED573; }
+  .level-2 .level-topics li::before { color: var(--accent); }
+  .level-3 .level-topics li::before { color: var(--gold); }
+
+  .level-duration {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--glass-border);
+    font-size: 0.85rem; color: var(--text-muted);
+  }
+
+  /* ===== WHY SECTION (for parents) ===== */
+  .why-section {
+    padding: 6rem 5%;
+    background: #0A0A1A;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(245,166,35,0.05) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1100px; margin: 0 auto;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+  .why-text h2 {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+  }
+
+  .why-text h2 span {
+    background: linear-gradient(135deg, var(--gold), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .why-text p {
+    color: var(--text-muted);
+    line-height: 1.9;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .why-points { margin-top: 2rem; }
+  .why-point {
+    display: flex; gap: 1rem; margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+  .why-point-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    background: rgba(245,166,35,0.1);
+    border: 1px solid rgba(245,166,35,0.2);
+  }
+  .why-point-text h4 { font-weight: 700; margin-bottom: 0.3rem; }
+  .why-point-text p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+  .why-visual {
+    position: relative;
+  }
+
+  .stat-boxes {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+  }
+
+  .stat-box {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .stat-box:hover { border-color: rgba(245,166,35,0.3); transform: scale(1.03); }
+  .stat-box:first-child { grid-column: span 2; background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(0,212,255,0.05)); border-color: rgba(245,166,35,0.2); }
+
+  .stat-big {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 3rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-box p { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.4rem; }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials-section {
+    padding: 6rem 5%;
+    background: linear-gradient(180deg, #0D1B3E 0%, #0A0A1A 100%);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .testimonial-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .testimonial-card:hover { transform: translateY(-5px); border-color: rgba(245,166,35,0.2); }
+
+  .testimonial-quote {
+    font-size: 2rem; color: var(--gold);
+    opacity: 0.4; margin-bottom: 1rem;
+    font-family: Georgia, serif;
+  }
+
+  .testimonial-text {
+    color: var(--text-muted);
+    line-height: 1.8; font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--deep);
+    flex-shrink: 0;
+  }
+  .author-name { font-weight: 700; font-size: 0.95rem; }
+  .author-role { color: var(--text-muted); font-size: 0.8rem; }
+
+  .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.8rem; }
+
+  /* ===== PRICING (FUNNEL CTA) ===== */
+  .pricing-section {
+    padding: 6rem 5%;
+    background: #0A0A1A;
+  }
+
+  .pricing-card {
+    max-width: 680px; margin: 0 auto;
+    background: linear-gradient(135deg, rgba(245,166,35,0.06), rgba(0,212,255,0.04));
+    border: 1px solid rgba(245,166,35,0.25);
+    border-radius: 24px;
+    padding: 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pricing-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--accent), var(--accent2));
+  }
+
+  .popular-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--accent2));
+    color: #fff;
+    padding: 0.3rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-old {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    margin-bottom: 0.3rem;
+  }
+
+  .price-new {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+
+  .price-period { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem; }
+
+  .pricing-features {
+    list-style: none;
+    text-align: right;
+    margin: 2rem 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
+  }
+  .pricing-features li {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--text-muted); font-size: 0.9rem;
+  }
+  .pricing-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+
+  .urgency-bar {
+    background: rgba(255,107,53,0.1);
+    border: 1px solid rgba(255,107,53,0.2);
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--accent2);
+    display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  }
+
+  .guarantee {
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+
+  /* ===== FAQ ===== */
+  .faq-section {
+    padding: 6rem 5%;
+    background: linear-gradient(180deg, #0A0A1A 0%, #0D1B3E 100%);
+  }
+
+  .faq-list { max-width: 800px; margin: 0 auto; }
+
+  .faq-item {
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .faq-item.open { border-color: rgba(245,166,35,0.3); }
+
+  .faq-question {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.3rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600; font-size: 1rem;
+    background: var(--glass);
+    transition: all 0.3s;
+    user-select: none;
+  }
+  .faq-question:hover { background: rgba(255,255,255,0.08); }
+
+  .faq-arrow {
+    font-size: 1.2rem; transition: transform 0.3s;
+    color: var(--gold);
+  }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  .faq-answer {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    padding: 0 1.5rem;
+    color: var(--text-muted); line-height: 1.8; font-size: 0.95rem;
+  }
+  .faq-item.open .faq-answer { max-height: 300px; padding: 1rem 1.5rem 1.3rem; }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    padding: 7rem 5%;
+    text-align: center;
+    background: linear-gradient(135deg, #0D1B3E 0%, #0A0A1A 50%, #1A0D0D 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(245,166,35,0.06) 0%, transparent 70%);
+  }
+
+  .final-cta h2 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .final-cta p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+    position: relative;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #050510;
+    border-top: 1px solid var(--glass-border);
+    padding: 2rem 5%;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    color: var(--text-muted); font-size: 0.85rem;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatAnim {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  @keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
+
+  .pulse-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: #2ED573;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.7s ease;
+  }
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Timer */
+  .countdown {
+    display: flex; gap: 1rem; justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .countdown-item {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    min-width: 75px;
+    text-align: center;
+  }
+  .countdown-num {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--gold);
+    display: block;
+  }
+  .countdown-label { font-size: 0.7rem; color: var(--text-muted); }
+
+  /* Mobile Responsive */
+  @media (max-width: 640px) {
+    .hero-stats { gap: 2rem; }
+    .pricing-features { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    nav .logo { font-size: 1.1rem; }
+  }
+
+  /* Scroll progress */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0;
+    height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    z-index: 999;
+    transition: width 0.1s;
+  }
+
+  body { cursor: default; }
+
+  /* ===== PLATFORM SECTION ===== */
+  .platform-section {
+    padding: 6rem 5%;
+    background: #0A0A1A;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .platform-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 50% at 20% 50%, rgba(0,212,255,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 50%, rgba(245,166,35,0.04) 0%, transparent 60%);
+  }
+
+  .platform-mockup {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  @media(max-width:768px) { .platform-mockup { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  .platform-text .section-tag { text-align: right; }
+  .platform-text h2 {
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 800; font-size: 2.2rem;
+    line-height: 1.3; margin-bottom: 1.2rem;
+  }
+  .platform-text h2 span {
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .platform-text p { color: var(--text-muted); line-height: 1.9; font-size: 1rem; margin-bottom: 2rem; }
+
+  .platform-features-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .platform-features-list li {
+    display: flex; align-items: flex-start; gap: 1rem;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    transition: all 0.3s;
+  }
+  .platform-features-list li:hover { border-color: rgba(0,212,255,0.25); transform: translateX(-4px); }
+  .pf-icon {
+    font-size: 1.5rem; flex-shrink: 0;
+    width: 44px; height: 44px;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.15);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pf-text h4 { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.2rem; }
+  .pf-text p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin: 0; }
+
+  /* Browser Mockup */
+  .browser-frame {
+    background: #111122;
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+  }
+  .browser-bar {
+    background: #1a1a2e;
+    padding: 0.8rem 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .d1 { background: #FF5F57; }
+  .d2 { background: #FEBC2E; }
+  .d3 { background: #28C840; }
+  .browser-url {
+    margin-right: 1rem; flex: 1;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem; color: var(--text-muted);
+    font-family: monospace;
+  }
+  .browser-content { padding: 0; }
+
+  /* Sidebar + Editor */
+  .platform-ui {
+    display: grid; grid-template-columns: 160px 1fr;
+    min-height: 340px;
+  }
+  .platform-sidebar {
+    background: #0d0d1f;
+    border-left: 1px solid var(--glass-border);
+    padding: 1rem 0;
+  }
+  .sidebar-item {
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem; color: var(--text-muted);
+    cursor: pointer;
+    display: flex; align-items: center; gap: 0.5rem;
+    transition: all 0.2s;
+    border-right: 3px solid transparent;
+  }
+  .sidebar-item.active {
+    background: rgba(0,212,255,0.06);
+    color: var(--accent);
+    border-right-color: var(--accent);
+  }
+  .sidebar-item:hover { background: rgba(255,255,255,0.03); color: var(--text); }
+
+  .sidebar-section {
+    font-size: 0.65rem; color: var(--text-muted);
+    padding: 1rem 1rem 0.4rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .platform-main { display: flex; flex-direction: column; }
+
+  .platform-tabs {
+    display: flex; background: #0f0f20;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .ptab {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem; color: var(--text-muted);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .ptab.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(0,212,255,0.04); }
+
+  .code-area {
+    flex: 1; padding: 1rem 1.2rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem; line-height: 1.8;
+    overflow: hidden;
+  }
+  .code-line { display: flex; gap: 1rem; }
+  .line-num { color: rgba(255,255,255,0.15); min-width: 20px; text-align: left; user-select: none; }
+  .kw { color: #C792EA; }
+  .str { color: #C3E88D; }
+  .tag { color: #F07178; }
+  .attr { color: #FFCB6B; }
+  .val { color: #C3E88D; }
+  .cm { color: rgba(255,255,255,0.2); font-style: italic; }
+  .fn { color: #82AAFF; }
+  .num { color: #F78C6C; }
+
+  .platform-bottom {
+    border-top: 1px solid var(--glass-border);
+    background: #0d0d1f;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .pstat {
+    padding: 0.7rem 1.2rem;
+    border-left: 1px solid var(--glass-border);
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem;
+  }
+  .pstat-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Stats strip below platform */
+  .platform-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; max-width: 1100px;
+    margin: 3rem auto 0;
+  }
+  @media(max-width:640px) { .platform-stats { grid-template-columns: 1fr; } }
+  .pstat-box {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .pstat-box:hover { border-color: rgba(0,212,255,0.2); transform: translateY(-3px); }
+  .pstat-box .big { font-family: 'Tajawal', sans-serif; font-size: 2.5rem; font-weight: 900; }
+  .c-accent { color: var(--accent); }
+  .c-gold { color: var(--gold); }
+  .c-green { color: #2ED573; }
+  .pstat-box p { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.3rem; }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">dolphin</div>
+  <button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">سجّل الآن</button>
+</nav>
+
+<!-- HERO SECTION — Awareness -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="float-code" style="top:20%;right:8%;animation-delay:0s">&#60;html&#62;</div>
+  <div class="float-code" style="top:70%;right:5%;animation-delay:1s;color:var(--gold)">CSS { }</div>
+  <div class="float-code" style="top:35%;left:5%;animation-delay:2s;color:var(--accent2)">function()</div>
+  <div class="float-code" style="top:65%;left:8%;animation-delay:3s">&#60;/div&#62;</div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="pulse-dot"></span>
+      التسجيل مفتوح الآن — أماكن محدودة
+    </div>
+
+    <h1 class="hero-title">
+      امنح طفلك مهارة<br>
+      <span>تصنع المستقبل</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      كورس تطوير المواقع المتكامل من الصفر للاحتراف — 3 مستويات تدريبية متخصصة تحوّل طفلك من مستخدم للإنترنت إلى صانع محتوى رقمي ومبرمج محترف
+    </p>
+
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">🚀 سجّل ابنك الآن</a>
+      <a href="#levels" class="btn-secondary">📚 اعرف المزيد</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">+500</div>
+        <div class="stat-label">طالب تخرج من البرنامج</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">97%</div>
+        <div class="stat-label">نسبة رضا الأولياء</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">مستويات متخصصة</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">12+</div>
+        <div class="stat-label">مشروع حقيقي</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN SECTION — Problem Awareness -->
+<section class="pain-section scroll-reveal">
+  <div class="section-tag">هل تعرف ما يواجهه أبناؤنا؟</div>
+  <h2 class="section-title">سوق العمل تغيّر… هل استعدّ أبناؤنا؟</h2>
+  <p class="section-sub">نعيش في عصر رقمي متسارع وأبناؤنا يستحقون أن يكونوا صانعين لا مجرد مستهلكين</p>
+
+  <div class="pain-grid">
+    <div class="pain-card scroll-reveal">
+      <div class="pain-icon">📉</div>
+      <h3>الوظائف التقليدية تتراجع</h3>
+      <p>85% من وظائف 2030 لم تُخترع بعد — والمهارات التقنية ستكون شرطاً أساسياً في معظمها</p>
+    </div>
+    <div class="pain-card scroll-reveal">
+      <div class="pain-icon">💻</div>
+      <h3>الإنترنت يُشغّل العالم</h3>
+      <p>كل شركة، متجر، مستشفى ومدرسة تحتاج موقعاً — من يبنيه يملك مفاتيح الاقتصاد الرقمي</p>
+    </div>
+    <div class="pain-card scroll-reveal">
+      <div class="pain-icon">🌍</div>
+      <h3>العمل الحر بلا حدود</h3>
+      <p>مطور الويب يعمل من أي مكان في العالم — ابنك يمكنه تحقيق دخل حقيقي وهو في سن مبكرة</p>
+    </div>
+    <div class="pain-card scroll-reveal">
+      <div class="pain-icon">⏰</div>
+      <h3>كل سنة تأخير تكلّف</h3>
+      <p>المهارات التقنية تُبنى على بعض — البدء المبكر يعني سنوات من التقدم على أقرانه</p>
+    </div>
+  </div>
+</section>
+
+<!-- LEVELS SECTION -->
+<section class="levels-section" id="levels">
+  <div class="section-tag">هيكل الكورس</div>
+  <h2 class="section-title scroll-reveal">3 مستويات تحوّل الهاوي إلى محترف</h2>
+  <p class="section-sub scroll-reveal">كل مستوى يبني على السابق — رحلة مدروسة من أول سطر كود حتى أول موقع ويب حقيقي</p>
+
+  <div class="levels-wrapper">
+    <!-- Level 1: HTML -->
+    <div class="level-card level-1 scroll-reveal">
+      <div class="level-header">
+        <div class="level-num">01</div>
+        <span class="level-badge">المستوى الأول</span>
+        <div class="level-icon">🏗️</div>
+        <div class="level-title">HTML</div>
+        <div class="level-subtitle">أساسيات بناء صفحات الويب</div>
+      </div>
+      <div class="level-body">
+        <ul class="level-topics">
+          <li>هيكل صفحة HTML الاحترافي</li>
+          <li>العناصر والوسوم الأساسية والمتقدمة</li>
+          <li>النماذج والجداول والقوائم</li>
+          <li>الروابط والصور والوسائط</li>
+          <li>HTML5 الدلالي SEO-Friendly</li>
+          <li>مشروع: موقع شخصي كامل</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <!-- Level 2: CSS -->
+    <div class="level-card level-2 scroll-reveal">
+      <div class="level-header">
+        <div class="level-num">02</div>
+        <span class="level-badge">المستوى الثاني</span>
+        <div class="level-icon">🎨</div>
+        <div class="level-title">CSS</div>
+        <div class="level-subtitle">تصميم واجهات احترافية وجذابة</div>
+      </div>
+      <div class="level-body">
+        <ul class="level-topics">
+          <li>خصائص CSS الأساسية والمتقدمة</li>
+          <li>Flexbox و CSS Grid للتخطيط</li>
+          <li>التصميم المتجاوب Responsive</li>
+          <li>الحركات والانتقالات Animations</li>
+          <li>متغيرات CSS والمكتبات</li>
+          <li>مشروع: متجر إلكتروني بصري</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <!-- Level 3: JavaScript -->
+    <div class="level-card level-3 scroll-reveal">
+      <div class="level-header">
+        <div class="level-num">03</div>
+        <span class="level-badge">المستوى الثالث</span>
+        <div class="level-icon">⚡</div>
+        <div class="level-title">JavaScript</div>
+        <div class="level-subtitle">إضافة التفاعلية والذكاء للمواقع</div>
+      </div>
+      <div class="level-body">
+        <ul class="level-topics">
+          <li>أساسيات البرمجة والمنطق</li>
+          <li>DOM Manipulation — التحكم بالصفحة</li>
+          <li>الأحداث Events والاستجابة</li>
+          <li>API والبيانات الديناميكية</li>
+          <li>ES6+ الحديثة وأفضل الممارسات</li>
+          <li>مشروع: تطبيق ويب تفاعلي كامل</li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM SECTION -->
+<section class="platform-section">
+  <div class="platform-mockup">
+
+    <!-- Text Side -->
+    <div class="platform-text scroll-reveal">
+      <div class="section-tag">المنصة التعليمية</div>
+      <h2>منصة تعليمية <span>متكاملة</span><br>مصممة خصيصاً لهم</h2>
+      <p>ابنك لن يتعلم من فيديوهات مملة — سيتفاعل مع منصة ذكية تشرح بشكل مبسط، تتحداه بتمارين، وتجعله يبني مشاريع حقيقية من اليوم الأول</p>
+
+      <ul class="platform-features-list">
+        <li>
+          <div class="pf-icon">🎓</div>
+          <div class="pf-text">
+            <h4>دروس مرئية تفاعلية مبسطة</h4>
+            <p>كل درس يُشرح بأسلوب بسيط ومرئي مع أمثلة حية يطبقها الطالب مباشرة على المنصة</p>
+          </div>
+        </li>
+        <li>
+          <div class="pf-icon">💪</div>
+          <div class="pf-text">
+            <h4>تمارين تفاعلية بعد كل درس</h4>
+            <p>تحديات صغيرة بعد كل درس تُثبّت المعلومة — المنصة تصحح الكود فوراً وتعطي تلميحات</p>
+          </div>
+        </li>
+        <li>
+          <div class="pf-icon">🚀</div>
+          <div class="pf-text">
+            <h4>مشاريع حقيقية قابلة للنشر</h4>
+            <p>في نهاية كل مستوى يبني الطالب مشروعاً حقيقياً وينشره على الإنترنت باسمه</p>
+          </div>
+        </li>
+        <li>
+          <div class="pf-icon">📊</div>
+          <div class="pf-text">
+            <h4>لوحة تقدم لولي الأمر</h4>
+            <p>تابع تقدم ابنك لحظة بلحظة — نسبة الإنجاز، الدروس المكتملة، والتمارين المحلولة</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Browser Mockup Side -->
+    <div class="scroll-reveal" style="animation-delay:0.2s">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dot d1"></div>
+          <div class="browser-dot d2"></div>
+          <div class="browser-dot d3"></div>
+          <div class="browser-url">🔒 academy.webcode.learn/html/lesson-3</div>
+        </div>
+        <div class="browser-content">
+          <div class="platform-ui">
+            <!-- Sidebar -->
+            <div class="platform-sidebar">
+              <div class="sidebar-section">المستوى الأول</div>
+              <div class="sidebar-item">📄 ما هو HTML؟</div>
+              <div class="sidebar-item">🏷️ الوسوم الأساسية</div>
+              <div class="sidebar-item active">🔗 الروابط والصور</div>
+              <div class="sidebar-item">📋 القوائم</div>
+              <div class="sidebar-item">📝 النماذج</div>
+              <div class="sidebar-section">تمارين</div>
+              <div class="sidebar-item">✅ تمرين 1</div>
+              <div class="sidebar-item">✅ تمرين 2</div>
+              <div class="sidebar-item" style="color:var(--gold)">🔒 تمرين 3</div>
+              <div class="sidebar-section">مشروعي</div>
+              <div class="sidebar-item">🌐 موقعي</div>
+            </div>
+
+            <!-- Editor -->
+            <div class="platform-main">
+              <div class="platform-tabs">
+                <div class="ptab active">index.html</div>
+                <div class="ptab">style.css</div>
+                <div class="ptab">▶ نتيجة</div>
+              </div>
+              <div class="code-area">
+                <div class="code-line"><span class="line-num">1</span><span class="cm">&lt;!-- صفحتي الأولى 🎉 --&gt;</span></div>
+                <div class="code-line"><span class="line-num">2</span><span class="tag">&lt;html&gt;</span></div>
+                <div class="code-line"><span class="line-num">3</span>&nbsp;&nbsp;<span class="tag">&lt;body&gt;</span></div>
+                <div class="code-line"><span class="line-num">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;h1&gt;</span><span class="str">مرحباً بالعالم!</span><span class="tag">&lt;/h1&gt;</span></div>
+                <div class="code-line"><span class="line-num">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;a</span> <span class="attr">href=</span><span class="val">"#"</span><span class="tag">&gt;</span><span class="str">اضغط هنا</span><span class="tag">&lt;/a&gt;</span></div>
+                <div class="code-line"><span class="line-num">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;img</span> <span class="attr">src=</span><span class="val">"photo.jpg"</span><span class="tag">/&gt;</span></div>
+                <div class="code-line"><span class="line-num">7</span>&nbsp;&nbsp;<span class="tag">&lt;/body&gt;</span></div>
+                <div class="code-line"><span class="line-num">8</span><span class="tag">&lt;/html&gt;</span></div>
+              </div>
+              <div class="platform-bottom">
+                <div class="pstat">
+                  <div class="pstat-dot" style="background:#2ED573"></div>
+                  <span style="font-size:0.72rem;color:var(--text-muted)">✅ الكود صحيح! أحسنت 🎉</span>
+                </div>
+                <div class="pstat">
+                  <div class="pstat-dot" style="background:var(--gold)"></div>
+                  <span style="font-size:0.72rem;color:var(--text-muted)">⭐ 3/3 نقاط مكتسبة</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Strip -->
+  <div class="platform-stats">
+    <div class="pstat-box scroll-reveal">
+      <div class="big c-accent">+200</div>
+      <p>درس تفاعلي مبسط على المنصة</p>
+    </div>
+    <div class="pstat-box scroll-reveal">
+      <div class="big c-gold">+150</div>
+      <p>تمرين وتحدي برمجي متدرج</p>
+    </div>
+    <div class="pstat-box scroll-reveal">
+      <div class="big c-green">12</div>
+      <p>مشروع حقيقي قابل للنشر</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SECTION — For Parents -->
+<section class="why-section" id="why">
+  <div class="why-grid">
+    <div class="why-text scroll-reveal">
+      <div class="section-tag" style="text-align:right">لماذا هذا الكورس؟</div>
+      <h2>ابنك لن يكون <span>موظفاً</span>…<br>سيكون منشئ المنصات</h2>
+      <p>نحن لا نعلّم مجرد كتابة كود — نبني عقلية حل المشكلات والتفكير المنطقي والإبداع الرقمي في شخصية طفلك</p>
+      <p>كل محاضرة مصممة لتناسب ذهن الطالب الصغير مع إخراج نتائج احترافية حقيقية يمكنه التفاخر بها</p>
+
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-point-icon">👨‍🏫</div>
+          <div class="why-point-text">
+            <h4>مدربون محترفون ومتخصصون</h4>
+            <p>خبرة تدريسية متراكمة مع إدراك كامل لاحتياجات وأسلوب تعلم هذه الفئة العمرية</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">🏆</div>
+          <div class="why-point-text">
+            <h4>مشاريع حقيقية وشهادة معتمدة</h4>
+            <p>يخرج طفلك بـ portfolio كامل من المشاريع وشهادة يمكنه استخدامها للتقديم لعمل مستقل</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">💬</div>
+          <div class="why-point-text">
+            <h4>متابعة شهرية مع ولي الأمر</h4>
+            <p>تقارير تقدم شهرية وتواصل مباشر مع المدرب — أنت دائماً على علم بما يتعلمه ابنك</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual scroll-reveal">
+      <div class="stat-boxes">
+        <div class="stat-box">
+          <div class="stat-big">$85,000</div>
+          <p>متوسط الراتب السنوي لمطور الويب في الغرب — وهو يعمل عن بُعد من أي مكان</p>
+        </div>
+        <div class="stat-box">
+          <div class="stat-big">3×</div>
+          <p>ثلاثة أضعاف فرص العمل في التقنية مقارنة بباقي القطاعات</p>
+        </div>
+        <div class="stat-box">
+          <div class="stat-big">#1</div>
+          <p>مطور الويب في قائمة أفضل مهن العمل الحر لـ 2024</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section scroll-reveal">
+  <div class="section-tag">آراء الأولياء</div>
+  <h2 class="section-title">ماذا قالوا عن الكورس؟</h2>
+  <p class="section-sub">آراء حقيقية من أولياء أمور سبقوك في اتخاذ هذا القرار</p>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">ابني كان يمضي وقته على اليوتيوب فقط — بعد ثلاثة أشهر من الكورس أصبح يبني مواقع لأصدقائه ويشرح لهم. التغيير كان مذهلاً</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">أ</div>
+        <div>
+          <div class="author-name">أم محمد</div>
+          <div class="author-role">ولية أمر — القاهرة</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">ابنتي (13 سنة) أنجزت موقعها الخاص في نهاية المستوى الثاني. أشركته في مسابقة مدرسية وفازت بالمركز الأول. لم أتوقع هذا المستوى</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">ف</div>
+        <div>
+          <div class="author-name">أبو فيصل</div>
+          <div class="author-role">ولي أمر — الرياض</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">ما يميز هذا الكورس هو التقارير المنتظمة وتواصل المدرب معي شخصياً. أشعر أنني شريك في تعليم ابني لا مجرد دافع رسوم</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">خ</div>
+        <div>
+          <div class="author-name">أم خالد</div>
+          <div class="author-role">ولية أمر — دبي</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section class="pricing-section" id="pricing">
+  <div class="section-tag">التسجيل الآن</div>
+  <h2 class="section-title scroll-reveal">استثمار في مستقبل ابنك</h2>
+  <p class="section-sub scroll-reveal">العرض الحالي محدود — الأماكن تُغلق عند اكتمال المجموعة</p>
+
+  <!-- Countdown -->
+  <div class="countdown scroll-reveal" id="countdown">
+    <div class="countdown-item">
+      <span class="countdown-num" id="days">02</span>
+      <div class="countdown-label">يوم</div>
+    </div>
+    <div class="countdown-item">
+      <span class="countdown-num" id="hours">14</span>
+      <div class="countdown-label">ساعة</div>
+    </div>
+    <div class="countdown-item">
+      <span class="countdown-num" id="minutes">33</span>
+      <div class="countdown-label">دقيقة</div>
+    </div>
+    <div class="countdown-item">
+      <span class="countdown-num" id="seconds">00</span>
+      <div class="countdown-label">ثانية</div>
+    </div>
+  </div>
+
+  <div class="pricing-card scroll-reveal">
+    <div class="popular-badge">🔥 الأكثر طلباً</div>
+
+
+    <ul class="pricing-features">
+      <li>✓ المستوى الأول: HTML</li>
+      <li>✓ المستوى الثاني: CSS</li>
+      <li>✓ المستوى الثالث: JavaScript</li>
+      <li>✓ 12 مشروع تطبيقي حقيقي</li>
+      <li>✓ شهادة معتمدة رقمية</li>
+      <li>✓ تقارير شهرية لولي الأمر</li>
+      <li>✓ دعم وإجابة على الأسئلة</li>
+      <li>✓ مجتمع خاص للطلاب</li>
+    </ul>
+
+    <div class="urgency-bar">
+      ⚠️ تبقّى <strong style="color:#FF6B35"> 7 أماكن فقط</strong> في المجموعة القادمة
+    </div>
+
+    <button class="btn-primary" style="width:100%;justify-content:center;font-size:1.1rem;padding:1.1rem" onclick="alert('سيتم التواصل معك قريباً! شكراً لثقتك بنا 🎉')">
+      🚀 سجّل ابنك الآن
+    </button>
+
+    <div class="guarantee">
+      🛡️ ضمان استرداد كامل خلال 7 أيام — بلا أي شروط
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-tag">أسئلة شائعة</div>
+  <h2 class="section-title scroll-reveal">كل ما تريد معرفته</h2>
+  <p class="section-sub scroll-reveal">أجوبة مباشرة لأكثر أسئلة أولياء الأمور شيوعاً</p>
+
+  <div class="faq-list scroll-reveal">
+    <div class="faq-item">
+      <div class="faq-question">ما العمر المناسب لبدء الكورس؟ <span class="faq-arrow">▼</span></div>
+      <div class="faq-answer">الكورس مصمم للطلاب من عمر 10 إلى 18 سنة. المنهج يتكيف مع مستوى كل فئة عمرية — المبتدئون الصغار يبدؤون بطريقة مبسطة والأكبر سناً يتعمقون أكثر.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">هل يحتاج ابني خبرة سابقة في البرمجة؟ <span class="faq-arrow">▼</span></div>
+      <div class="faq-answer">لا! الكورس مصمم من الصفر تماماً. المستوى الأول يبدأ من أبسط مفاهيم الويب ولا يفترض أي معرفة مسبقة. كل ما يحتاجه ابنك هو جهاز كمبيوتر ورغبة في التعلم.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">كم عدد ساعات الدراسة الأسبوعية؟ <span class="faq-arrow">▼</span></div>
+      <div class="faq-answer">حصتان أسبوعياً بمدة ساعة ونصف لكل حصة، بالإضافة إلى 1-2 ساعة للتطبيق المنزلي. المجموع لا يتجاوز 5 ساعات أسبوعياً — يمكن الجمع بينه وبين الدراسة بسهولة.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">هل الكورس أونلاين أم حضوري؟ <span class="faq-arrow">▼</span></div>
+      <div class="faq-answer">الكورس مقدَّم أونلاين بالكامل عبر بيئة تعليمية تفاعلية. الطالب يمكنه المشاركة الحية مع المدرب والزملاء، مع إمكانية مشاهدة التسجيلات لاحقاً.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">ما الفرق بين هذا الكورس والكورسات المجانية على الإنترنت؟ <span class="faq-arrow">▼</span></div>
+      <div class="faq-answer">الكورسات المجانية تفتقر إلى التوجيه الشخصي والمتابعة وبناء المشاريع الحقيقية. كورسنا يوفر مدرباً يتابع كل طالب بشكل فردي، تقارير لولي الأمر، مجتمع دعم، وشهادة معتمدة — وهو ما لا توفره أي منصة مجانية.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">ماذا بعد اتمام المستويات الثلاثة؟ <span class="faq-arrow">▼</span></div>
+      <div class="faq-answer">يخرج طفلك بـ portfolio احترافي ومهارات كافية للعمل المستقل. نوفر أيضاً توجيهاً للمسارات التالية كـ React أو Backend أو تطوير التطبيقات — لمن يريد الاستمرار في بناء مستقبله التقني.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta scroll-reveal">
+  <h2>
+    القرار الذي يصنع <span style="background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent">10 سنوات قادمة</span>
+  </h2>
+  <p>كل يوم تأخير هو يوم تقدم لطالب آخر سبق ابنك. الأماكن محدودة والدفعة القادمة تبدأ قريباً</p>
+  <a href="#" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem" onclick="alert('سيتم التواصل معك قريباً! 🎉')">
+    سجّل ابنك الآن — ابدأ رحلة المستقبل 🚀
+  </a>
+</section>
+
+<footer>
+  <span>© 2024 WebCode Academy — جميع الحقوق محفوظة</span>
+  <span>📧 info@webcode.academy | 📞 +966 50 000 0000</span>
+</footer>
+
+<script>
+  // Scroll Progress
+  window.addEventListener('scroll', () => {
+    const progress = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('scrollProgress').style.width = progress + '%';
+  });
+
+  // Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+  // FAQ
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Countdown Timer (2 days from now)
+  const endTime = new Date().getTime() + (2 * 24 * 60 * 60 * 1000);
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = endTime - now;
+    if (diff < 0) return;
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('days').textContent = String(d).padStart(2, '0');
+    document.getElementById('hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+</body>
+</html>
